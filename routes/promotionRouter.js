@@ -8,7 +8,7 @@ promotionRouter.use(bodyParser.json());
 
 
 //endpoints for '/'(promotions)
-  promotionRouter.route('/')
+promotionRouter.route('/')
 .get((req, res, next) => {
     Promotion.find()
     .then(promotions => {
@@ -45,7 +45,7 @@ promotionRouter.use(bodyParser.json());
 ///end points for /:promotionId
 promotionRouter.route('/:promotionId')
 .get((req, res, next) => {
-    Promotion.findById(req.params.promtionId)
+    Promotion.findById(req.params.promotionId)
     .then(promotion => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
