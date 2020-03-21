@@ -1,17 +1,21 @@
+//Middlewares
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//importing Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const campsiteRouter = require('./routes/campsiteRouter');
 const promotionRouter = require('./routes/promotionRouter');
 const partnerRouter = require('./routes/partnerRouter');
 
+//Using mongoose
 const mongoose = require('mongoose');
 
+// Database
 const url = 'mongodb://localhost:27017/nucampsite';//mongodb server
 const connect = mongoose.connect(url, {
   useCreateIndex: true,
@@ -22,14 +26,15 @@ const connect = mongoose.connect(url, {
 
 //connected to the server
 connect.then(() => console.log('Connected correctly to server'), 
-    err => console.log(err)
+    err => console.log(err) //catch method
 );
 
+//Using express middleware framework
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'jade')
 
 app.use(logger('dev'));
 app.use(express.json());

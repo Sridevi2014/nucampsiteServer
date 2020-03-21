@@ -1,15 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser'); //json body parser
-const Campsite = require('../models/campsite');
+const express = require('express'); // Importing express middleware
+const bodyParser = require('body-parser'); //using body parser
+const Campsite = require('../models/campsite'); 
 
-const campsiteRouter = express.Router();
+const campsiteRouter = express.Router(); // Router object from express  
 
-campsiteRouter.use(bodyParser.json());// display json format
+campsiteRouter.use(bodyParser.json());// display json format//// body-parser extract the entire body portion of an incoming request stream and exposes it on req.body. Used with express
 
-//endpoints for '/'
+//endpoints for '/'(campsites)
 campsiteRouter.route('/')
 .get((req, res, next) => {
-    Campsite.find()
+    Campsite.find() // This is find all the "documents" in a collection
     .then(campsites => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -42,7 +42,7 @@ campsiteRouter.route('/')
 });
 
 ///end points for /:campsiteId
-campsiteRouter.route('/:campsiteId')
+campsiteRouter.route('/:campsiteId') //this is called a URL Parameter
 .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
     .then(campsite => {
@@ -77,7 +77,7 @@ campsiteRouter.route('/:campsiteId')
     .catch(err => next(err));
 });
 
-///end points for /:campsiteId/comments
+//end points for /:campsiteId/comments
 campsiteRouter.route('/:campsiteId/comments')
 .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
